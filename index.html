@@ -168,22 +168,24 @@
       <h2 class="blur-in">One wallet across major EVM networks.</h2>
       <p class="lead fill">Hold ETH on Ethereum, use apps on Base, keep tokens on Arbitrum. Pick a network to see its assets, its native currency and where you are sending from, right inside Send and Receive.</p>
     </div>
-    <ul class="chains">
-      <li style="--c:#627eea"><i>Ξ</i>Ethereum</li>
-      <li style="--c:#0052ff"><i>B</i>Base</li>
-      <li style="--c:#28a0f0"><i>A</i>Arbitrum One</li>
-      <li style="--c:#ff0420"><i>OP</i>OP Mainnet</li>
-      <li style="--c:#8247e5"><i>P</i>Polygon</li>
-      <li style="--c:#f0b90b"><i>BNB</i>BNB Smart Chain</li>
-      <li style="--c:#e84142"><i>A</i>Avalanche</li>
-      <li style="--c:#61dfff"><i>L</i>Linea</li>
-      <li style="--c:#eecfa8"><i>S</i>Scroll</li>
-      <li style="--c:#3e9c75"><i>G</i>Gnosis</li>
-      <li style="--c:#fcfc03"><i>B</i>Blast</li>
-      <li style="--c:#65b3ae"><i>M</i>Mantle</li>
-      <li style="--c:#fcff52"><i>C</i>Celo</li>
-      <li style="--c:#8c8dfc"><i>zk</i>zkSync Era</li>
-    </ul>
+    <div class="belt" aria-label="Supported networks">
+      <ul class="belt-track" id="beltTrack">
+        <li style="--c:#627eea"><span class="logo"><img src="assets/chains/ethereum.svg" alt=""></span>Ethereum</li>
+        <li style="--c:#0052ff"><span class="logo"><img src="assets/chains/base.svg" alt=""></span>Base</li>
+        <li style="--c:#28a0f0"><span class="logo"><img src="assets/chains/arbitrum-one.svg" alt=""></span>Arbitrum One</li>
+        <li style="--c:#ff0420"><span class="logo"><img src="assets/chains/optimism.svg" alt=""></span>OP Mainnet</li>
+        <li style="--c:#8247e5"><span class="logo"><img src="assets/chains/polygon.svg" alt=""></span>Polygon</li>
+        <li style="--c:#f0b90b"><span class="logo"><img src="assets/chains/binance-smart-chain.svg" alt=""></span>BNB Smart Chain</li>
+        <li style="--c:#e84142"><span class="logo"><img src="assets/chains/avalanche.svg" alt=""></span>Avalanche</li>
+        <li style="--c:#61dfff"><span class="logo"><img src="assets/chains/linea.svg" alt="" class="inv"></span>Linea</li>
+        <li style="--c:#eecfa8"><span class="logo"><img src="assets/chains/scroll.svg" alt=""></span>Scroll</li>
+        <li style="--c:#3e9c75"><span class="logo"><img src="assets/chains/gnosis.svg" alt=""></span>Gnosis</li>
+        <li style="--c:#fcfc03"><span class="logo"><img src="assets/chains/blast.svg" alt=""></span>Blast</li>
+        <li style="--c:#65b3ae"><span class="logo"><img src="assets/chains/mantle.svg" alt=""></span>Mantle</li>
+        <li style="--c:#fcff52"><span class="logo"><img src="assets/chains/celo.svg" alt=""></span>Celo</li>
+        <li style="--c:#8c8dfc"><span class="logo"><img src="assets/chains/zksync.svg" alt="" class="inv"></span>zkSync Era</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -203,7 +205,7 @@
         <div class="ui ui-port">
           <div class="up-top"><span>Total on Ethereum</span><em>Partial total</em></div>
           <div class="up-n" data-count="6402.18">$6,402.18</div>
-          <svg class="spark" viewBox="0 0 300 70" preserveAspectRatio="none"><defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5cff" stop-opacity=".35"/><stop offset="1" stop-color="#7b5cff" stop-opacity="0"/></linearGradient></defs><path class="area" d="M0 58 L30 52 L60 55 L90 40 L120 44 L150 30 L180 34 L210 22 L240 26 L270 12 L300 16 L300 70 L0 70 Z"/><path class="line" pathLength="1" d="M0 58 L30 52 L60 55 L90 40 L120 44 L150 30 L180 34 L210 22 L240 26 L270 12 L300 16"/></svg>
+          <div class="spark"><svg class="spark-area" viewBox="0 0 300 70" preserveAspectRatio="none"><defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5cff" stop-opacity=".35"/><stop offset="1" stop-color="#7b5cff" stop-opacity="0"/></linearGradient></defs><path class="area" d="M0 58 L30 52 L60 55 L90 40 L120 44 L150 30 L180 34 L210 22 L240 26 L270 12 L300 16 L300 70 L0 70 Z"/></svg><svg class="spark-line" viewBox="0 0 300 70" preserveAspectRatio="none"><path class="line" d="M0 58 L30 52 L60 55 L90 40 L120 44 L150 30 L180 34 L210 22 L240 26 L270 12 L300 16"/></svg></div>
           <div class="up-row"><i class="tk eth">Ξ</i><span>Ether</span><b>$3,012.40</b></div>
           <div class="up-row"><i class="tk usdc">$</i><span>USD Coin</span><b>$1,206.10</b></div>
           <div class="up-row"><i class="tk">?</i><span>Custom token <small>0x5aD3…71bE</small></span><b class="dash">—</b></div>
@@ -275,7 +277,7 @@
         <div class="ui ui-recv">
           <div class="qr" aria-hidden="true"></div>
           <div class="ur-a">0xf39f…2266</div>
-          <div class="ur-n"><b></b>Base</div>
+          <div class="ur-n"><b></b><span>Base</span></div>
         </div>
         <h3>Receive</h3>
         <p>Your active account's address and QR code, next to the network the sender should use. Switch networks right there.</p>
@@ -304,35 +306,12 @@
 <!-- ============ iPhone ============ -->
 <section class="sec" id="iphone">
   <div class="wrap split">
-    <div class="phones" aria-hidden="true">
+    <div class="phones">
       <div class="phone">
-        <div class="ph-isl"></div>
-        <div class="ph-scr">
-          <div class="ph-head"><span>All accounts</span><span class="chip sm"><b></b>Ethereum</span></div>
-          <div class="ph-l">Your balance on Ethereum</div>
-          <div class="ph-n">$4,218.50</div>
-          <div class="ph-recv">↓ Receive</div>
-          <div class="ph-sec">Assets</div>
-          <div class="ph-row"><i class="tk eth">Ξ</i><span>ETH<small>Main</small></span><b>$3,012.40</b></div>
-          <div class="ph-row"><i class="tk usdc">$</i><span>USDC<small>Main</small></span><b>$1,206.10</b></div>
-          <div class="ph-tabs"><i class="on"></i><i></i><i></i><i></i></div>
-        </div>
+        <img class="ph-shot" src="assets/app/iphone-wallet.jpg" alt="Coldly iPhone app: your balance on Ethereum, with Receive and your assets">
       </div>
       <div class="phone ph-back">
-        <div class="ph-isl"></div>
-        <div class="ph-scr">
-          <div class="ph-title">Settings</div>
-          <div class="ph-sec">What this phone holds</div>
-          <div class="ph-list">
-            <span>Your addresses and their names</span>
-            <span>The tokens you watch</span>
-            <span class="x">No recovery phrase</span>
-            <span class="x">No private key</span>
-            <span class="x">No vault file and no USB key</span>
-            <span class="x">Nothing that can sign</span>
-          </div>
-          <div class="ph-toggle"><span>Face ID</span><i></i></div>
-        </div>
+        <img class="ph-shot" src="assets/app/iphone-settings.jpg" alt="Coldly iPhone app settings: what this phone holds. No recovery phrase, no private key, nothing that can sign.">
       </div>
     </div>
     <div class="split-txt">

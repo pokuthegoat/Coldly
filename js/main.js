@@ -165,7 +165,7 @@
   /* ---------- Hero: scale the stage to fit ---------- */
   const stage = document.getElementById('stage');
   const stageBox = document.getElementById('stageBox');
-  const DESIGN_W = 480, DESIGN_H = 580;
+  const DESIGN_W = 480, DESIGN_H = 620;
   new ResizeObserver(() => {
     const s = Math.min(stageBox.clientWidth / DESIGN_W, stageBox.clientHeight / DESIGN_H, 1.15);
     stage.style.setProperty('--s', Math.max(s, 0.3).toFixed(3));
@@ -320,6 +320,85 @@
     });
   });
 
+  /* ---------- Looping card demos (only run while the card is on screen) ---------- */
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  function whileVisible(el, run) {
+    let on = false;
+    new IntersectionObserver(([en]) => {
+      if (en.isIntersecting && !on) { on = true; (async () => { while (on) await run(); })(); }
+      if (!en.isIntersecting) on = false;
+    }, { threshold: 0.3 }).observe(el);
+  }
+
+  if (!reduce) {
+    // Accounts: the selection moves between accounts
+    const accts = [...document.querySelectorAll('.ua')];
+    let ai = 0;
+    whileVisible(document.querySelector('.ui-accts'), async () => {
+      await wait(2600);
+      accts[ai].classList.remove('on');
+      ai = (ai + 1) % accts.length;
+      accts[ai].classList.add('on');
+    });
+
+    // Tokens: paste, read details, clear, again
+    const tokIn = document.querySelector('.ut-in'), tokOut = document.querySelector('.ut-out');
+    const tokText = tokIn.firstChild.nodeValue;
+    whileVisible(document.querySelector('.ui-token'), async () => {
+      await wait(4200);
+      tokOut.classList.remove('show');
+      await wait(500);
+      await new Promise(done => typeInto(tokIn, tokText, done));
+      tokOut.classList.add('show');
+    });
+
+    // Receive: switch networks right on the Receive screen
+    const recv = document.querySelector('.ui-recv'), net = recv.querySelector('.ur-n');
+    const nets = [['Base', '#0052ff'], ['Ethereum', '#627eea'], ['Arbitrum One', '#28a0f0'], ['Polygon', '#8247e5']];
+    let ni = 0;
+    whileVisible(recv, async () => {
+      await wait(2400);
+      ni = (ni + 1) % nets.length;
+      net.classList.add('swap'); recv.classList.add('flash');
+      await wait(260);
+      net.querySelector('span').textContent = nets[ni][0];
+      net.querySelector('b').style.background = nets[ni][1];
+      net.classList.remove('swap'); recv.classList.remove('flash');
+    });
+
+    // Approvals: revoke the unlimited allowance, then reset
+    const appr = document.querySelector('.uap'), apprBtn = appr.querySelector('b'), apprAmt = appr.querySelector('em');
+    whileVisible(document.querySelector('.ui-appr'), async () => {
+      await wait(1800);
+      appr.classList.add('press'); await wait(180); appr.classList.remove('press');
+      appr.classList.add('revoking'); apprBtn.textContent = 'Revoking';
+      await wait(1500);
+      appr.classList.replace('revoking', 'revoked'); apprBtn.textContent = 'Revoked'; apprAmt.textContent = '0';
+      await wait(2600);
+      appr.classList.remove('revoked'); apprBtn.textContent = 'Revoke'; apprAmt.textContent = 'Unlimited';
+    });
+
+    // Activity: a new transaction arrives as pending, then confirms
+    const act = document.querySelector('.ui-act');
+    const pool = [['in', '↓', 'Received 120 USDC'], ['', '↑', 'Sent 0.1 ETH'], ['in', '↓', 'Received 0.5 ETH'], ['', '↑', 'Sent 40 USDC'], ['', '↑', 'Sent 0.25 ETH']];
+    let pi = 0;
+    whileVisible(act, async () => {
+      await wait(1600);
+      const pending = act.querySelector('.pnd');
+      if (pending) { pending.classList.remove('pnd'); pending.textContent = 'Confirmed'; }
+      await wait(1800);
+      const [cls, arrow, label] = pool[pi++ % pool.length];
+      const row = document.createElement('div');
+      row.className = 'uac enter';
+      row.innerHTML = `<i class="${cls}">${arrow}</i><span>${label}<small class="pnd">Pending</small></span>`;
+      const last = act.lastElementChild;
+      act.prepend(row);
+      last.classList.add('leave');
+      await wait(450);
+      last.remove();
+    });
+
+  }
   /* ---------- Footer wordmark rises in as you reach the bottom ---------- */
   const mark = document.querySelector('.foot-mark span');
   function updateMark() {
@@ -336,7 +415,7 @@
   }
 
   /* ---------- Polish: cursor spotlight on cards ---------- */
-  document.querySelectorAll('.card, .steps3 li, .ui-review, .recover, .chains li').forEach(el => {
+  document.querySelectorAll('.card, .steps3 li, .ui-review, .recover').forEach(el => {
     el.classList.add('spot');
     el.addEventListener('pointermove', e => {
       const r = el.getBoundingClientRect();
@@ -346,8 +425,13 @@
   });
 
   /* ---------- Polish: things that animate once they come into view ---------- */
-  const chainItems = [...document.querySelectorAll('.chains li')];
-  chainItems.forEach((li, i) => li.style.setProperty('--d', i));
+  // Conveyor belt: a second copy of the logos follows the first, so the loop has no seam.
+  const beltTrack = document.getElementById('beltTrack');
+  [...beltTrack.children].forEach(li => {
+    const copy = li.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    beltTrack.appendChild(copy);
+  });
 
   const countUp = el => {
     const to = parseFloat(el.dataset.count);
@@ -390,7 +474,7 @@
       if (el.classList.contains('ui-review')) setTimeout(() => el.classList.add('acked'), reduce ? 0 : 2000);
     });
   }, { threshold: 0.35 });
-  document.querySelectorAll('.chains, .card, .ui-review, .steps3').forEach(el => viewObserver.observe(el));
+  document.querySelectorAll('.card, .ui-review, .steps3').forEach(el => viewObserver.observe(el));
 
   /* ---------- Loop ---------- */
   function onScroll() { updateHero(); updateFills(); updateNav(); updateMark(); updateProgress(); }
