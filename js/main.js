@@ -130,6 +130,79 @@
     });
   }
 
+  /* ---------- Page-wide dot field that reacts to the cursor ---------- */
+  (() => {
+    const cvs = document.getElementById('dots');
+    const heroEl = document.getElementById('hero');
+    const ctx = cvs.getContext('2d');
+    const GAP = 28, RADIUS = 170, PUSH = 10;
+    let w = 0, h = 0, dpr = 1;
+    let mx = -9999, my = -9999;      // where the cursor is
+    let ex = -9999, ey = -9999;      // eased position, so the effect trails smoothly
+    let strength = 0, target = 0, running = false;
+
+    function resize() {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      w = innerWidth; h = innerHeight;
+      cvs.width = w * dpr; cvs.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      // Dots scroll with the page, except while the hero is pinned: the hero stands
+      // still during its steps, so the dots do too.
+      const pinned = heroEl.offsetHeight - innerHeight;
+      const moved = scrollY <= pinned ? 0 : scrollY - pinned;
+      const offY = -(moved % GAP);
+      for (let y = offY; y < h + GAP; y += GAP) {
+        for (let x = GAP / 2; x < w; x += GAP) {
+          let px = x, py = y, k = 0;
+          if (strength > 0.01) {
+            const dx = x - ex, dy = y - ey, d = Math.hypot(dx, dy);
+            if (d < RADIUS) {
+              k = (1 - d / RADIUS) ** 2 * strength;
+              px += (dx / (d || 1)) * PUSH * k;
+              py += (dy / (d || 1)) * PUSH * k;
+            }
+          }
+          // base dots are faint white; near the cursor they grow and shift toward purple
+          const r = 0.9 + 1.5 * k;
+          const a = 0.08 + 0.55 * k;
+          ctx.fillStyle = k > 0
+            ? `rgba(${Math.round(255 - 132 * k)},${Math.round(255 - 163 * k)},255,${a})`
+            : 'rgba(255,255,255,.08)';
+          ctx.beginPath();
+          ctx.arc(px, py, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    function tick() {
+      ex += (mx - ex) * 0.18;
+      ey += (my - ey) * 0.18;
+      strength += (target - strength) * 0.12;
+      draw();
+      const settled = Math.abs(mx - ex) < 0.5 && Math.abs(my - ey) < 0.5 && Math.abs(target - strength) < 0.01;
+      if (settled) running = false;
+      else requestAnimationFrame(tick);
+    }
+    const kick = () => { if (!running) { running = true; requestAnimationFrame(tick); } };
+
+    if (!reduce && matchMedia('(pointer: fine)').matches) {
+      addEventListener('pointermove', e => {
+        if (ex < -999) { ex = e.clientX; ey = e.clientY; }
+        mx = e.clientX; my = e.clientY; target = 1; kick();
+      }, { passive: true });
+      document.addEventListener('pointerleave', () => { target = 0; kick(); });
+    }
+    addEventListener('scroll', () => { if (!running) draw(); }, { passive: true });
+    addEventListener('resize', resize);
+    resize();
+  })();
+
   /* ---------- Letter-by-letter fill on scroll (drone-style) ---------- */
   const fills = [...document.querySelectorAll('.fill')].map(el => {
     const words = el.textContent.trim().split(/\s+/);

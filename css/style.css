@@ -293,10 +293,9 @@ small .b2,.bal-n .b2{left:0}
 
 .sec{position:relative;isolation:isolate}
 
-/* faint dot grid that fades out toward the edges */
-.hero-pin::before,#networks::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.3px);background-size:28px 28px}
-.hero-pin::before{-webkit-mask-image:radial-gradient(ellipse 60% 55% at 68% 45%,#000 10%,transparent 72%);mask-image:radial-gradient(ellipse 60% 55% at 68% 45%,#000 10%,transparent 72%)}
-#networks::after{z-index:-1;-webkit-mask-image:radial-gradient(ellipse 55% 45% at 50% 68%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse 55% 45% at 50% 68%,#000 10%,transparent 75%)}
+/* page-wide dot field (drawn on a canvas, reacts to the cursor) */
+.dots{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,.foot{position:relative;z-index:1}
 
 /* ==========================================================
    SECTIONS
