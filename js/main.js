@@ -1,5 +1,6 @@
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
   const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
   const easeInOutCubic = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
@@ -327,8 +328,72 @@
     mark.style.setProperty('--my', ((1 - p) * 40).toFixed(1) + '%');
   }
 
+  /* ---------- Polish: scroll progress ---------- */
+  const navBar = document.querySelector('.nav');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    navBar.style.setProperty('--sp', max > 0 ? (scrollY / max).toFixed(4) : 0);
+  }
+
+  /* ---------- Polish: cursor spotlight on cards ---------- */
+  document.querySelectorAll('.card, .steps3 li, .ui-review, .recover, .chains li').forEach(el => {
+    el.classList.add('spot');
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  /* ---------- Polish: things that animate once they come into view ---------- */
+  const chainItems = [...document.querySelectorAll('.chains li')];
+  chainItems.forEach((li, i) => li.style.setProperty('--d', i));
+
+  const countUp = el => {
+    const to = parseFloat(el.dataset.count);
+    const fmt = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (reduce) { el.textContent = fmt(to); return; }
+    const t0 = performance.now(), dur = 1600;
+    const tick = now => {
+      const k = Math.min((now - t0) / dur, 1);
+      el.textContent = fmt(to * (1 - Math.pow(1 - k, 3)));
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const typeInto = (el, text, done) => {
+    const caret = el.querySelector('.caret');
+    el.firstChild.nodeValue = '';
+    let i = 0;
+    const step = () => {
+      el.firstChild.nodeValue = text.slice(0, ++i);
+      if (i < text.length) setTimeout(step, reduce ? 0 : 55);
+      else done();
+    };
+    if (caret) setTimeout(step, reduce ? 0 : 400);
+  };
+
+  const viewObserver = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      el.classList.add('inview');
+      viewObserver.unobserve(el);
+      const n = el.querySelector('[data-count]');
+      if (n) countUp(n);
+      const tok = el.querySelector('.ut-in');
+      if (tok) {
+        const text = tok.firstChild.nodeValue;
+        typeInto(tok, text, () => el.querySelector('.ut-out').classList.add('show'));
+      }
+      if (el.classList.contains('ui-review')) setTimeout(() => el.classList.add('acked'), reduce ? 0 : 2000);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.chains, .card, .ui-review, .steps3').forEach(el => viewObserver.observe(el));
+
   /* ---------- Loop ---------- */
-  function onScroll() { updateHero(); updateFills(); updateNav(); updateMark(); }
+  function onScroll() { updateHero(); updateFills(); updateNav(); updateMark(); updateProgress(); }
   if (lenis) lenis.on('scroll', onScroll);
   else addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', () => { measureRail(); sizeCAs(); onScroll(); });

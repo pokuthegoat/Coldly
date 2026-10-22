@@ -1,0 +1,109 @@
+/* ==========================================================
+   Coldly — polish pass (light, depth and in-view motion)
+   ========================================================== */
+
+/* scrollbar + scroll progress */
+html{scrollbar-width:thin;scrollbar-color:#3a3550 transparent}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#2c2838;border-radius:10px;border:3px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--purple)}
+.progress{position:absolute;left:0;bottom:0;height:2px;width:100%;background:linear-gradient(90deg,transparent,var(--purple) 30%,#c9b8ff);transform-origin:left;transform:scaleX(var(--sp,0));box-shadow:0 0 12px rgba(123,92,255,.8);pointer-events:none}
+
+/* headline type: soft white-to-lavender light falling on the letters */
+h1 .w,h2 .w{background:linear-gradient(180deg,#fff 40%,#cbbfff 125%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:18px;height:1px;background:currentColor;opacity:.7}
+.head.center .eyebrow::after{content:"";width:18px;height:1px;background:currentColor;opacity:.7}
+
+/* hero: floor glow + lit window edge */
+.win-floor{position:absolute;left:60px;right:60px;bottom:-6px;height:60px;border-radius:50%;background:radial-gradient(closest-side,rgba(123,92,255,.35),transparent);filter:blur(18px);opacity:.5;transition:opacity .8s ease}
+.stage.unlocked .win-floor{opacity:1}
+.win{box-shadow:0 50px 100px -40px #000,0 0 0 1px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07)}
+.win::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.06),transparent 35%)}
+
+/* cards: lit top edge, cursor spotlight, border that glows near the cursor */
+.card,.steps3 li,.ui-review,.recover,.chains li{box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.spot{position:relative;overflow:hidden;isolation:isolate}
+.spot::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(123,92,255,.13),transparent 45%);opacity:0;transition:opacity .4s ease}
+.spot::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(170,150,255,.75),transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s ease}
+.spot:hover::after,.spot:hover::before{opacity:1}
+.card,.steps3 li{transition:transform .5s var(--ease),border-color .3s ease}
+.card:hover,.steps3 li:hover{transform:translateY(-4px)}
+
+/* ---------- in-view animations (only when JS is running) ---------- */
+.js .chains li{opacity:0;transform:translateY(18px) scale(.94)}
+.js .chains.inview li{opacity:1;transform:none;transition:opacity .6s ease calc(var(--d,0) * 45ms),transform .8s var(--ease) calc(var(--d,0) * 45ms),border-color .3s ease,background .3s ease,color .3s ease,box-shadow .35s ease}
+.js .chains.inview li:hover{transform:scale(1.08);transition-delay:0s}
+
+/* portfolio card */
+.js .spark .line{stroke-dasharray:1;stroke-dashoffset:1}
+.js .inview .spark .line{stroke-dashoffset:0;transition:stroke-dashoffset 2s var(--ease) .3s}
+.spark{overflow:visible}
+.spark .area{fill:url(#sparkFill);stroke:none;opacity:0;transition:opacity 1.2s ease 1.2s}
+.inview .spark .area,.no-js .spark .area{opacity:1}
+.js .up-row,.js .ua,.js .uap,.js .uac,.js .ui-review .kv{opacity:0;transform:translateX(-14px)}
+.js .inview .up-row,.js .inview .ua,.js .inview .uap,.js .inview .uac,.js .ui-review.inview .kv{opacity:1;transform:none;transition:opacity .5s ease,transform .7s var(--ease)}
+.js .inview :is(.up-row,.ua,.uap,.uac,.kv):nth-child(2){transition-delay:.08s}
+.js .inview :is(.up-row,.ua,.uap,.uac,.kv):nth-child(3){transition-delay:.16s}
+.js .inview :is(.up-row,.ua,.uap,.uac,.kv):nth-child(4){transition-delay:.24s}
+.js .inview :is(.up-row,.ua,.uap,.uac,.kv):nth-child(5){transition-delay:.32s}
+.js .inview :is(.up-row,.ua,.uap,.uac,.kv):nth-child(6){transition-delay:.40s}
+.js .inview :is(.up-row,.ua,.uap,.uac,.kv):nth-child(7){transition-delay:.48s}
+.js .up-top em{opacity:0;transform:scale(.6)}
+.js .inview .up-top em{opacity:1;transform:none;transition:opacity .4s ease 1.4s,transform .6s cubic-bezier(.3,1.6,.5,1) 1.4s}
+.ua.on{position:relative;overflow:hidden}
+.ua.on::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(123,92,255,.25) 50%,transparent 70%);transform:translateX(-100%)}
+.inview .ua.on::after{animation:sweep 1.4s var(--ease) .6s}
+@keyframes sweep{to{transform:translateX(100%)}}
+
+/* token card: outputs pop in after the address is typed */
+.js .ut-out span{opacity:0;transform:translateY(8px)}
+.ut-out.show span{opacity:1;transform:none;transition:opacity .4s ease,transform .6s var(--ease)}
+.ut-out.show span:nth-child(2){transition-delay:.1s}
+.ut-out.show span:nth-child(3){transition-delay:.2s}
+
+/* review mock: critical box arrives, gets acknowledged, Sign enables */
+.js .ui-review .crit{opacity:0;transform:scale(.96)}
+.js .ui-review.inview .crit{opacity:1;transform:none;transition:opacity .5s ease .5s,transform .7s cubic-bezier(.3,1.5,.5,1) .5s}
+.ui-review.inview .crit-t svg{animation:alarm 1.6s ease-in-out .9s 2}
+@keyframes alarm{50%{transform:scale(1.25)}}
+.ack .box{position:relative;transition:background .3s ease,border-color .3s ease}
+.ack .box::after{content:"";position:absolute;left:5px;top:1.5px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.ui-review.acked .ack .box{background:var(--purple);border-color:var(--purple)}
+.ui-review.acked .ack .box::after{transform:rotate(45deg) scale(1)}
+.ui-review .sign.off{transition:background .5s ease,color .5s ease,box-shadow .5s ease}
+.ui-review.acked .sign.off{background:var(--purple);color:#fff;box-shadow:0 10px 30px -10px var(--purple)}
+
+/* receive: scanning line over the QR */
+.qr{position:relative;overflow:hidden}
+.qr::after{content:"";position:absolute;left:0;right:0;top:-30%;height:30%;background:linear-gradient(to bottom,transparent,rgba(123,92,255,.55),transparent);animation:scan 2.6s ease-in-out infinite}
+@keyframes scan{to{top:100%}}
+
+/* approvals + activity details */
+.inview .uap:first-child em{animation:warnpulse 1.6s ease-in-out 1s 2}
+@keyframes warnpulse{50%{text-shadow:0 0 12px var(--amber)}}
+.uac small.pnd{display:inline-flex;align-items:center;gap:6px}
+.uac small.pnd::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber);animation:blinkdot 1.2s ease-in-out infinite}
+@keyframes blinkdot{50%{opacity:.25}}
+
+/* phones float */
+.phone{animation:float 7s ease-in-out infinite}
+.ph-back{animation:float 7s ease-in-out -3.5s infinite}
+@keyframes float{50%{translate:0 -12px}}
+
+/* setup numbers light up in order */
+.steps3 .num{transition:background .5s ease,color .5s ease,box-shadow .5s ease}
+.steps3.inview li .num{background:var(--purple);color:#fff;box-shadow:0 0 0 6px rgba(123,92,255,.15),0 0 30px rgba(123,92,255,.6)}
+.steps3.inview li:nth-child(2) .num{transition-delay:.35s}
+.steps3.inview li:nth-child(3) .num{transition-delay:.7s}
+
+/* final mark: logo with a spinning halo */
+.final-mark{position:relative;width:96px;height:96px;margin:0 auto 40px}
+.final-mark .final-logo{position:relative;margin:0}
+.halo{position:absolute;inset:-22px;border-radius:36px;background:conic-gradient(from var(--ang,0deg),transparent,rgba(123,92,255,.9),transparent 40%,rgba(201,184,255,.6),transparent 75%);filter:blur(14px);animation:spin 6s linear infinite;opacity:.8}
+
+@media (prefers-reduced-motion:reduce){
+  .js .chains li,.js .up-row,.js .ua,.js .uap,.js .uac,.js .ui-review .kv,.js .ut-out span,.js .ui-review .crit,.js .up-top em{opacity:1;transform:none}
+  .js .spark .line{stroke-dashoffset:0}
+  .phone,.ph-back,.qr::after,.halo{animation:none}
+}

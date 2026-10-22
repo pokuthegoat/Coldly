@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/polish.css">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -24,6 +25,7 @@
 </svg>
 
 <header class="nav">
+  <div class="progress" aria-hidden="true"></div>
   <div class="wrap nav-in">
     <a class="brand" href="#top" data-scroll><img src="assets/logo.jpg" alt="">Coldly</a>
     <nav class="menu" aria-label="Main">
@@ -80,6 +82,7 @@
 
       <div class="stage-box" id="stageBox">
         <div class="stage" id="stage" data-step="0" role="img" aria-label="A Coldly window: the wallet unlocks, a transaction is reviewed and signed, then the USB is unplugged and signing locks while the balance stays visible.">
+          <div class="win-floor" aria-hidden="true"></div>
           <div class="win">
             <div class="win-ring" aria-hidden="true"></div>
             <div class="win-bar"><img src="assets/logo.jpg" alt="">Coldly<div class="win-ctrl"><i></i><i></i><i></i></div></div>
@@ -199,8 +202,8 @@
         </div>
         <div class="ui ui-port">
           <div class="up-top"><span>Total on Ethereum</span><em>Partial total</em></div>
-          <div class="up-n">$6,402.18</div>
-          <svg class="spark" viewBox="0 0 300 70" preserveAspectRatio="none"><path d="M0 58 L30 52 L60 55 L90 40 L120 44 L150 30 L180 34 L210 22 L240 26 L270 12 L300 16"/></svg>
+          <div class="up-n" data-count="6402.18">$6,402.18</div>
+          <svg class="spark" viewBox="0 0 300 70" preserveAspectRatio="none"><defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5cff" stop-opacity=".35"/><stop offset="1" stop-color="#7b5cff" stop-opacity="0"/></linearGradient></defs><path class="area" d="M0 58 L30 52 L60 55 L90 40 L120 44 L150 30 L180 34 L210 22 L240 26 L270 12 L300 16 L300 70 L0 70 Z"/><path class="line" pathLength="1" d="M0 58 L30 52 L60 55 L90 40 L120 44 L150 30 L180 34 L210 22 L240 26 L270 12 L300 16"/></svg>
           <div class="up-row"><i class="tk eth">Ξ</i><span>Ether</span><b>$3,012.40</b></div>
           <div class="up-row"><i class="tk usdc">$</i><span>USD Coin</span><b>$1,206.10</b></div>
           <div class="up-row"><i class="tk">?</i><span>Custom token <small>0x5aD3…71bE</small></span><b class="dash">—</b></div>
@@ -411,7 +414,7 @@
 <!-- ============ Download ============ -->
 <section class="sec final" id="download">
   <div class="wrap center">
-    <img class="final-logo" src="assets/logo.jpg" alt="">
+    <div class="final-mark" aria-hidden="true"><span class="halo"></span><img class="final-logo" src="assets/logo.jpg" alt=""></div>
     <h2 class="blur-in">Your USB. Your crypto lock.</h2>
     <p class="lead">Plug in. Unlock. Review. Sign. Unplug.</p>
     <div class="btn-row center">
