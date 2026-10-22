@@ -459,6 +459,20 @@
     });
 
   }
+  /* ---------- Giant background words drift sideways as their section passes ---------- */
+  const giants = [...document.querySelectorAll('.giant')].map(g => ({
+    sec: g.parentElement, span: g.querySelector('span'), dir: +g.dataset.dir || 1
+  }));
+  function updateGiants() {
+    if (reduce) return;
+    giants.forEach(({ sec, span, dir }) => {
+      const r = sec.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const p = (innerHeight - r.top) / (innerHeight + r.height); // 0 → 1 while on screen
+      span.style.setProperty('--gx', (dir * (p - 0.5) * 360).toFixed(1) + 'px');
+    });
+  }
+
   /* ---------- Footer wordmark rises in as you reach the bottom ---------- */
   const mark = document.querySelector('.foot-mark span');
   function updateMark() {
@@ -537,7 +551,7 @@
   document.querySelectorAll('.card, .ui-review, .steps3').forEach(el => viewObserver.observe(el));
 
   /* ---------- Loop ---------- */
-  function onScroll() { updateHero(); updateFills(); updateNav(); updateMark(); updateProgress(); }
+  function onScroll() { updateHero(); updateFills(); updateNav(); updateMark(); updateProgress(); updateGiants(); }
   if (lenis) lenis.on('scroll', onScroll);
   else addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', () => { measureRail(); sizeCAs(); onScroll(); });

@@ -129,7 +129,38 @@ h1 .w,h2 .w{background:linear-gradient(180deg,#fff 40%,#cbbfff 125%);-webkit-bac
 @keyframes rowout{to{opacity:0;transform:translateY(12px)}}
 .uac small{transition:color .4s ease}
 
+/* ==========================================================
+   Breaking up the dark: giant words, tape
+   ========================================================== */
+
+/* 2. giant outlined words that drift sideways with scroll */
+.giant{position:absolute;z-index:-1;left:0;right:0;top:40px;overflow:hidden;pointer-events:none;user-select:none;text-align:center;line-height:.8}
+.giant span{display:inline-block;white-space:nowrap;font-size:clamp(140px,22vw,360px);font-weight:500;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.07);transform:translateX(var(--gx,0px))}
+#review .giant,#iphone .giant{top:50%;margin-top:-.4em}
+
+/* 3. habit tape after the hero */
+.tapes{position:relative;z-index:1;height:220px;margin:20px 0 -40px;overflow:hidden}
+.tape{position:absolute;left:-5%;width:110%;top:50%;padding:18px 0;overflow:hidden}
+.tape-front{background:var(--purple);transform:translateY(-50%) rotate(-3deg);box-shadow:0 20px 60px -20px rgba(0,0,0,.8)}
+.tape-back{background:#1d1c24;border-block:1px solid var(--line);transform:translateY(-50%) rotate(3deg)}
+.tape-track{display:flex;align-items:center;width:max-content;animation:tape 30s linear infinite}
+.tape-back .tape-track{animation-direction:reverse;animation-duration:38s}
+.tape span{font-size:34px;font-weight:500;letter-spacing:-.03em;padding:0 22px;white-space:nowrap}
+.tape i{font-style:normal;font-size:20px}
+.tape-front span{color:#fff}
+.tape-front i{color:#d6ccff}
+.tape-back span{color:rgba(255,255,255,.45)}
+.tape-back i{color:var(--purple)}
+@keyframes tape{to{transform:translateX(-50%)}}
+
+@media (max-width:900px){
+  .tapes{height:150px;margin:0 0 -30px}
+  .tape{padding:12px 0}
+  .tape span{font-size:22px;padding:0 14px}
+}
+
 @media (prefers-reduced-motion:reduce){
+  .tape-track{animation:none}
   .js .up-row,.js .ua,.js .uap,.js .uac,.js .ui-review .kv,.js .ut-out span,.js .ui-review .crit,.js .up-top em{opacity:1;transform:none}
   .js .spark-line{clip-path:none}
   .phone,.ph-back,.qr::after,.halo{animation:none}
