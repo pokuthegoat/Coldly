@@ -130,14 +130,6 @@
     });
   }
 
-  /* ---------- Section light fades in once each section is on screen ---------- */
-  const litObserver = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting) { en.target.classList.add('lit'); litObserver.unobserve(en.target); }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.sec').forEach(s => litObserver.observe(s));
-
   /* ---------- Letter-by-letter fill on scroll (drone-style) ---------- */
   const fills = [...document.querySelectorAll('.fill')].map(el => {
     const words = el.textContent.trim().split(/\s+/);
@@ -176,7 +168,6 @@
   const rail = document.getElementById('rail');
   const steps = [...rail.querySelectorAll('.step')];
   const win = stage.querySelector('.win');
-  const glow = document.querySelector('.hero-glow');
   let edges = [], lineLen = 0, current = -1, loaded = false, timers = [];
 
   // Line runs centre-to-centre; offsetLeft ignores the active dot's scale.
@@ -197,9 +188,8 @@
   const flag = (cls, on) => stage.classList.toggle(cls, on);
   const pulse = (cls, ms) => { flag(cls, false); void stage.offsetWidth; flag(cls, true); later(ms, () => flag(cls, false)); };
 
-  // Window tilt + glow position per step, for a bit of drama between states.
+  // Window tilt per step, for a bit of drama between states.
   const TILT = [[-10, 4], [-4, 2], [6, -2], [2, 0], [-12, 5]];
-  const GLOW = [[72, 52, .2], [62, 40, .3], [55, 50, .24], [66, 46, .34], [78, 60, .1]];
 
   function goTo(n) {
     if (n === current) return;
@@ -210,9 +200,6 @@
 
     win.style.setProperty('--ry', TILT[n][0] + 'deg');
     win.style.setProperty('--rx', TILT[n][1] + 'deg');
-    glow.style.setProperty('--gx', GLOW[n][0] + '%');
-    glow.style.setProperty('--gy', GLOW[n][1] + '%');
-    glow.style.setProperty('--ga', GLOW[n][2]);
 
     const plugged = loaded && n <= 3;
     flag('spent', n === 4);
