@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coldly – Make any USB a cold wallet</title>
+<meta name="description" content="Coldly is a free Windows crypto wallet that only signs while your paired USB is plugged in. Pull it out and signing locks, while your balances stay readable.">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Arrow-in-circle used by every button -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arrow" viewBox="0 0 20 20"><path d="M6 10h8m-3.5-3.5L14 10l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="x-logo" viewBox="0 0 24 24"><path fill="currentColor" d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.18h1.7L7.4 4.73H5.58l11.09 14.45Z"/></symbol>
+  <symbol id="copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="tick" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" data-scroll><img src="assets/logo.jpg" alt="">Coldly</a>
+    <nav class="menu" aria-label="Main">
+      <div class="links" id="links">
+        <span class="hover-pill" aria-hidden="true"></span>
+        <a href="#hero" data-scroll data-sec="hero">How it works</a>
+        <a href="#networks" data-scroll data-sec="networks">Networks</a>
+        <a href="#features" data-scroll data-sec="features">Features</a>
+        <a href="#review" data-scroll data-sec="review">Security</a>
+        <a href="#iphone" data-scroll data-sec="iphone">iPhone</a>
+      </div>
+      <a class="btn btn-accent" href="#download" data-scroll>
+        <span class="btn-label">Download</span>
+        <span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span>
+      </a>
+      <button class="ca " type="button" aria-label="Copy contract address"><span class="ca-pill"><span class="ca-l">CA</span><span class="ca-v"></span><span class="ca-ico"><svg class="i-copy"><use href="#copy"/></svg><svg class="i-tick"><use href="#tick"/></svg></span></span></button>
+      <a class="icon-btn" href="https://x.com/ColdlyWallet" target="_blank" rel="noopener" aria-label="Coldly on X"><svg><use href="#x-logo"/></svg></a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="sheet"><i></i><i></i></button>
+  </div>
+  <div class="sheet" id="sheet">
+    <a href="#hero" data-scroll>How it works</a>
+    <a href="#networks" data-scroll>Networks</a>
+    <a href="#features" data-scroll>Features</a>
+    <a href="#review" data-scroll>Security</a>
+    <a href="#iphone" data-scroll>iPhone</a>
+    <a class="btn btn-light" href="#download" data-scroll>
+      <span class="btn-label">Download for Windows</span>
+      <span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span>
+    </a>
+    <button class="ca static" type="button" aria-label="Copy contract address"><span class="ca-pill"><span class="ca-l">CA</span><span class="ca-v"></span><span class="ca-ico"><svg class="i-copy"><use href="#copy"/></svg><svg class="i-tick"><use href="#tick"/></svg></span></span></button>
+    <a class="sheet-x" href="https://x.com/ColdlyWallet" target="_blank" rel="noopener"><svg><use href="#x-logo"/></svg>Follow @ColdlyWallet</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO: the habit, acted out on scroll ============ -->
+<section class="hero" id="hero">
+  <div class="hero-pin">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1 class="blur-in">Make any USB a cold wallet.</h1>
+        <p class="lead">Coldly is a free crypto wallet for Windows. Plug in your paired USB and enter your password to sign. Pull it out and signing locks, while your balances stay on screen.</p>
+        <div class="btn-row">
+          <a class="btn btn-light" href="#download" data-scroll>
+            <span class="btn-label">Download for Windows</span>
+            <span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span>
+          </a>
+          <span class="btn btn-ghost" aria-disabled="true"><span class="btn-label">Coming soon to iPhone</span></span>
+        </div>
+      </div>
+
+      <div class="stage-box" id="stageBox">
+        <div class="stage" id="stage" data-step="0" role="img" aria-label="A Coldly window: the wallet unlocks, a transaction is reviewed and signed, then the USB is unplugged and signing locks while the balance stays visible.">
+          <div class="win">
+            <div class="win-ring" aria-hidden="true"></div>
+            <div class="win-bar"><img src="assets/logo.jpg" alt="">Coldly<div class="win-ctrl"><i></i><i></i><i></i></div></div>
+            <div class="win-body">
+              <div class="win-top">
+                <div class="acct">Main<small>0xf39f…2266</small></div>
+                <div class="chip"><b></b>Ethereum</div>
+              </div>
+
+              <div class="status">
+                <svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path class="shackle" d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                <span class="st st-locked">Signing locked</span>
+                <span class="st st-usb">USB detected. Enter your password.</span>
+                <span class="st st-open">Signing unlocked</span>
+                <span class="st st-after">Signing locked. Balances still visible.</span>
+              </div>
+
+              <div class="screens">
+                <!-- home -->
+                <div class="scr scr-home">
+                  <div class="bal-l">Balance on Ethereum</div>
+                  <div class="bal-n"><span class="b1">$4,218.50</span><span class="b2">$3,592.05</span></div>
+                  <div class="rows">
+                    <div class="row"><i class="tk eth">Ξ</i><div>Ether<small><span class="b1">1.2041 ETH</span><span class="b2">0.9537 ETH</span></small></div><div class="v"><span class="b1">$3,012.40</span><span class="b2">$2,385.95</span></div></div>
+                    <div class="row"><i class="tk usdc">$</i><div>USD Coin<small>1,206.10 USDC</small></div><div class="v">$1,206.10</div></div>
+                  </div>
+                  <div class="acts"><span class="a-send">Send</span><span class="a-recv">Receive</span></div>
+                </div>
+
+                <!-- password -->
+                <div class="scr scr-pass">
+                  <div class="pass-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 12h10M7 12v5h3v-5M17 12V7a5 5 0 0 0-10 0"/></svg></div>
+                  <div class="pass-t">Unlock signing</div>
+                  <div class="pass-s">Your USB is plugged in. Enter your password.</div>
+                  <div class="pass-f"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="caret"></span></div>
+                  <div class="pass-b">Unlock</div>
+                </div>
+
+                <!-- review -->
+                <div class="scr scr-review">
+                  <div class="rv-t">Review transaction</div>
+                  <div class="kv"><span>From</span><b>Main · 0xf39f…2266</b></div>
+                  <div class="kv"><span>To</span><b>0x8a3F…9c21</b></div>
+                  <div class="kv"><span>Network</span><b>Ethereum</b></div>
+                  <div class="kv"><span>Amount</span><b>0.25 ETH</b></div>
+                  <div class="kv"><span>Network fee</span><b>≈ $1.84</b></div>
+                  <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4m0 3.5v.5M10.3 3.9 2.5 18a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>First-time recipient</div>
+                  <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Node chain ID matches Ethereum</div>
+                  <div class="rv-acts"><span>Cancel</span><span class="sign">Sign<i class="ripple"></i></span></div>
+                </div>
+
+                <!-- sent -->
+                <div class="scr scr-sent">
+                  <svg class="check" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><path d="m26 41 9.5 9.5L55 31"/></svg>
+                  <div class="sent-t">Signed and sent</div>
+                  <div class="sent-s">0.25 ETH to 0x8a3F…9c21</div>
+                  <div class="sent-c"><span class="pend">Waiting for confirmation…</span><span class="conf">Confirmed · View on explorer</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <ol class="rail" id="rail" aria-label="The Coldly habit">
+        <li class="step"><span class="dot"><svg viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6 8h12v4a6 6 0 0 1-12 0V8Zm6 10v3"/></svg></span><span class="lbl">Plug in</span></li>
+        <li class="step"><span class="dot"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/></svg></span><span class="lbl">Unlock</span></li>
+        <li class="step"><span class="dot"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="lbl">Review</span></li>
+        <li class="step"><span class="dot"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4Zm9-13 4 4"/></svg></span><span class="lbl">Sign</span></li>
+        <li class="step"><span class="dot"><svg viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6 8h12v4a6 6 0 0 1-12 0V8Zm6 10v3M3 3l18 18"/></svg></span><span class="lbl">Unplug</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Networks ============ -->
+<section class="sec" id="networks">
+  <div class="wrap">
+    <div class="head center">
+      <h4 class="eyebrow">Networks</h4>
+      <h2 class="blur-in">One wallet across major EVM networks.</h2>
+      <p class="lead fill">Hold ETH on Ethereum, use apps on Base, keep tokens on Arbitrum. Pick a network to see its assets, its native currency and where you are sending from, right inside Send and Receive.</p>
+    </div>
+    <ul class="chains">
+      <li style="--c:#627eea"><i>Ξ</i>Ethereum</li>
+      <li style="--c:#0052ff"><i>B</i>Base</li>
+      <li style="--c:#28a0f0"><i>A</i>Arbitrum One</li>
+      <li style="--c:#ff0420"><i>OP</i>OP Mainnet</li>
+      <li style="--c:#8247e5"><i>P</i>Polygon</li>
+      <li style="--c:#f0b90b"><i>BNB</i>BNB Smart Chain</li>
+      <li style="--c:#e84142"><i>A</i>Avalanche</li>
+      <li style="--c:#61dfff"><i>L</i>Linea</li>
+      <li style="--c:#eecfa8"><i>S</i>Scroll</li>
+      <li style="--c:#3e9c75"><i>G</i>Gnosis</li>
+      <li style="--c:#fcfc03"><i>B</i>Blast</li>
+      <li style="--c:#65b3ae"><i>M</i>Mantle</li>
+      <li style="--c:#fcff52"><i>C</i>Celo</li>
+      <li style="--c:#8c8dfc"><i>zk</i>zkSync Era</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ Portfolio / accounts / tokens ============ -->
+<section class="sec" id="features">
+  <div class="wrap">
+    <div class="head">
+      <h4 class="eyebrow">Your wallet</h4>
+      <h2 class="blur-in">Everything you hold, shown honestly.</h2>
+    </div>
+    <div class="bento">
+      <article class="card card-big">
+        <div class="card-txt">
+          <h3>A clear view of what you hold</h3>
+          <p>Home brings together your balance, assets, protection status and recent activity. Assets are identified by network and contract address, not by ticker. When a price is missing, Coldly says so instead of guessing.</p>
+        </div>
+        <div class="ui ui-port">
+          <div class="up-top"><span>Total on Ethereum</span><em>Partial total</em></div>
+          <div class="up-n">$6,402.18</div>
+          <svg class="spark" viewBox="0 0 300 70" preserveAspectRatio="none"><path d="M0 58 L30 52 L60 55 L90 40 L120 44 L150 30 L180 34 L210 22 L240 26 L270 12 L300 16"/></svg>
+          <div class="up-row"><i class="tk eth">Ξ</i><span>Ether</span><b>$3,012.40</b></div>
+          <div class="up-row"><i class="tk usdc">$</i><span>USD Coin</span><b>$1,206.10</b></div>
+          <div class="up-row"><i class="tk">?</i><span>Custom token <small>0x5aD3…71bE</small></span><b class="dash">—</b></div>
+          <div class="up-stale">Some prices are from 6 minutes ago</div>
+        </div>
+      </article>
+      <article class="card">
+        <h3>Many accounts, one recovery phrase</h3>
+        <p>Name accounts for everyday use, a project or anything else. They all come from the same phrase, and you can switch while signing is locked.</p>
+        <div class="ui ui-accts">
+          <div class="ua on"><b>Main</b><span>0xf39f…2266</span></div>
+          <div class="ua"><b>Spending</b><span>0x7099…79c8</span></div>
+          <div class="ua"><b>Project</b><span>0x3C44…93BC</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <h3>Add the tokens you use</h3>
+        <p>Paste a contract address and Coldly reads its name, symbol and decimals. Removing a token only stops Coldly watching it.</p>
+        <div class="ui ui-token">
+          <div class="ut-in">0x5aD3…71bE<span class="caret"></span></div>
+          <div class="ut-out"><span>Name<b>Example Token</b></span><span>Symbol<b>EXT</b></span><span>Decimals<b>18</b></span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Review before you sign ============ -->
+<section class="sec" id="review">
+  <div class="wrap split">
+    <div class="split-txt">
+      <h4 class="eyebrow">Review</h4>
+      <h2 class="blur-in">See what you are signing.</h2>
+      <p class="lead fill">Coldly prepares every transaction for review first: sender, network, recipient, asset, amount and estimated fee. Its checks bring possible problems into view. They support your review; they do not promise every address or contract is safe.</p>
+      <ul class="checks">
+        <li>Burn-address recipients</li>
+        <li>First-time recipients</li>
+        <li>Unlimited approvals</li>
+        <li>Certain suspicious contract interactions</li>
+        <li>Node chain ID matches the network you picked</li>
+      </ul>
+    </div>
+    <div class="ui ui-review">
+      <div class="rv-t">Review transaction</div>
+      <div class="kv"><span>From</span><b>Main · 0xf39f…2266</b></div>
+      <div class="kv"><span>To</span><b>0x0000…dEaD</b></div>
+      <div class="kv"><span>Network</span><b>Base</b></div>
+      <div class="kv"><span>Amount</span><b>500 USDC</b></div>
+      <div class="kv"><span>Network fee</span><b>≈ $0.02</b></div>
+      <div class="crit">
+        <div class="crit-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 8v5m0 3.5v.5"/><circle cx="12" cy="12" r="9.5"/></svg>Critical: burn address</div>
+        <p>Tokens sent here can never be recovered.</p>
+        <label class="ack"><span class="box"></span>I understand, continue anyway</label>
+      </div>
+      <div class="rv-acts"><span>Cancel</span><span class="sign off">Sign</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Receive / approvals / activity ============ -->
+<section class="sec" id="manage">
+  <div class="wrap">
+    <div class="head">
+      <h4 class="eyebrow">After you send</h4>
+      <h2 class="blur-in">Receive, approvals and activity.</h2>
+    </div>
+    <div class="three">
+      <article class="card">
+        <div class="ui ui-recv">
+          <div class="qr" aria-hidden="true"></div>
+          <div class="ur-a">0xf39f…2266</div>
+          <div class="ur-n"><b></b>Base</div>
+        </div>
+        <h3>Receive</h3>
+        <p>Your active account's address and QR code, next to the network the sender should use. Switch networks right there.</p>
+      </article>
+      <article class="card">
+        <div class="ui ui-appr">
+          <div class="uap"><span>USDC<small>Uniswap router</small></span><em>Unlimited</em><b>Revoke</b></div>
+          <div class="uap"><span>DAI<small>Aave pool</small></span><em class="lim">1,000</em><b>Revoke</b></div>
+        </div>
+        <h3>Approvals</h3>
+        <p>Inspect supported token allowances left over from apps you used, and prepare revocations.</p>
+      </article>
+      <article class="card">
+        <div class="ui ui-act">
+          <div class="uac"><i class="in">↓</i><span>Received 0.5 ETH<small>Confirmed</small></span></div>
+          <div class="uac"><i>↑</i><span>Sent 0.25 ETH<small>Confirmed</small></span></div>
+          <div class="uac"><i>↑</i><span>Sent 40 USDC<small class="pnd">Pending</small></span></div>
+        </div>
+        <h3>Activity</h3>
+        <p>Transactions for the selected account, with confirmation status and links to the explorer.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ iPhone ============ -->
+<section class="sec" id="iphone">
+  <div class="wrap split">
+    <div class="phones" aria-hidden="true">
+      <div class="phone">
+        <div class="ph-isl"></div>
+        <div class="ph-scr">
+          <div class="ph-head"><span>All accounts</span><span class="chip sm"><b></b>Ethereum</span></div>
+          <div class="ph-l">Your balance on Ethereum</div>
+          <div class="ph-n">$4,218.50</div>
+          <div class="ph-recv">↓ Receive</div>
+          <div class="ph-sec">Assets</div>
+          <div class="ph-row"><i class="tk eth">Ξ</i><span>ETH<small>Main</small></span><b>$3,012.40</b></div>
+          <div class="ph-row"><i class="tk usdc">$</i><span>USDC<small>Main</small></span><b>$1,206.10</b></div>
+          <div class="ph-tabs"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="phone ph-back">
+        <div class="ph-isl"></div>
+        <div class="ph-scr">
+          <div class="ph-title">Settings</div>
+          <div class="ph-sec">What this phone holds</div>
+          <div class="ph-list">
+            <span>Your addresses and their names</span>
+            <span>The tokens you watch</span>
+            <span class="x">No recovery phrase</span>
+            <span class="x">No private key</span>
+            <span class="x">No vault file and no USB key</span>
+            <span class="x">Nothing that can sign</span>
+          </div>
+          <div class="ph-toggle"><span>Face ID</span><i></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="split-txt">
+      <h4 class="eyebrow">iPhone</h4>
+      <h2 class="blur-in">Your balances on your phone.</h2>
+      <p class="lead fill">The Coldly iPhone app is a read-only window onto your wallet. It shows what you hold and cannot spend. Pair it once from Settings on your computer, then it reads the chain itself, even with your PC switched off.</p>
+      <ul class="checks">
+        <li>No recovery phrase, keys or USB key on the phone</li>
+        <li>Face ID before balances show</li>
+        <li>Works with your computer off</li>
+      </ul>
+      <div class="btn-row">
+        <span class="btn btn-ghost" aria-disabled="true"><span class="btn-label">Coming soon to iPhone</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Setup & recovery ============ -->
+<section class="sec" id="setup">
+  <div class="wrap">
+    <div class="head center">
+      <h4 class="eyebrow">Setup</h4>
+      <h2 class="blur-in">Guided from the first plug-in.</h2>
+    </div>
+    <ol class="steps3">
+      <li><span class="num">1</span><h3>Pair a USB</h3><p>Any ordinary USB drive becomes the second key to your wallet's signing.</p></li>
+      <li><span class="num">2</span><h3>Create your wallet</h3><p>Set your password and Coldly creates your wallet and first account.</p></li>
+      <li><span class="num">3</span><h3>Confirm your phrase</h3><p>Write down your recovery phrase and confirm it. It is the foundation of recovery.</p></li>
+    </ol>
+    <div class="recover">
+      <h3>Lost your USB?</h3>
+      <p>Your recovery phrase rebuilds the wallet with a new USB and password. The USB is for everyday access; the phrase is what recovers your accounts, so keep it safe. You can revisit the setup guidance any time inside the app.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Honest note ============ -->
+<section class="sec note" id="note">
+  <div class="wrap">
+    <h4 class="eyebrow">What Coldly is</h4>
+    <p class="statement fill">The USB holds unlock material, not your coins. Your assets stay on their blockchains and signing happens on your computer. Coldly is a software wallet with a USB lock, not a hardware wallet. It does not turn a USB drive into secure signing hardware. It gives your wallet a physical step you can see and feel.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec faq" id="faq">
+  <div class="wrap faq-grid">
+    <div class="faq-head">
+      <h4 class="eyebrow">FAQ</h4>
+      <h2 class="blur-in">Questions, answered.</h2>
+      <p class="lead">The short version: your USB unlocks signing, your recovery phrase recovers your wallet, and your coins never leave their blockchains.</p>
+    </div>
+    <div class="faq-list">
+      <div class="qa">
+        <button class="q" aria-expanded="false" aria-controls="a0" id="q0"><span>Is Coldly a hardware wallet?</span><i aria-hidden="true"></i></button>
+        <div class="a" id="a0" role="region" aria-labelledby="q0"><div><p>No. Coldly is a software wallet with USB-gated access. The USB holds unlock material, and transaction signing happens on your computer. It does not turn a USB drive into secure signing hardware; it adds a physical step before you can sign.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false" aria-controls="a1" id="q1"><span>Are my coins stored on the USB?</span><i aria-hidden="true"></i></button>
+        <div class="a" id="a1" role="region" aria-labelledby="q1"><div><p>No. Your assets stay on their blockchains. The USB is a second key to your wallet's signing access, not a place where coins are kept.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false" aria-controls="a2" id="q2"><span>What if I lose my USB?</span><i aria-hidden="true"></i></button>
+        <div class="a" id="a2" role="region" aria-labelledby="q2"><div><p>Your recovery phrase rebuilds the wallet with a new USB and password. That is why protecting the phrase matters: the USB is for everyday access, the phrase is what recovers your accounts.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false" aria-controls="a3" id="q3"><span>Do the transaction checks make every transaction safe?</span><i aria-hidden="true"></i></button>
+        <div class="a" id="a3" role="region" aria-labelledby="q3"><div><p>No. They flag things like burn-address recipients, first-time recipients, unlimited approvals and certain suspicious contract interactions, and they check the node's chain ID. They support your review; they cannot guarantee an address, token or contract is safe.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q" aria-expanded="false" aria-controls="a4" id="q4"><span>How much does Coldly cost?</span><i aria-hidden="true"></i></button>
+        <div class="a" id="a4" role="region" aria-labelledby="q4"><div><p>Coldly is free. It runs on Windows.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Download ============ -->
+<section class="sec final" id="download">
+  <div class="wrap center">
+    <img class="final-logo" src="assets/logo.jpg" alt="">
+    <h2 class="blur-in">Your USB. Your crypto lock.</h2>
+    <p class="lead">Plug in. Unlock. Review. Sign. Unplug.</p>
+    <div class="btn-row center">
+      <a class="btn btn-light" href="#" id="dl">
+        <span class="btn-label">Download for Windows</span>
+        <span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span>
+      </a>
+      <span class="btn btn-ghost" aria-disabled="true"><span class="btn-label">Coming soon to iPhone</span></span>
+    </div>
+    <p class="fine">Free for Windows.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="#top" data-scroll><img src="assets/logo.jpg" alt="">Coldly</a>
+        <p>Your USB. Your crypto lock. A free Windows wallet that only signs while your paired USB is plugged in.</p>
+        <div class="foot-actions">
+          <a class="btn btn-light" href="#download" data-scroll>
+            <span class="btn-label">Download for Windows</span>
+            <span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span>
+          </a>
+          <a class="icon-btn lg" href="https://x.com/ColdlyWallet" target="_blank" rel="noopener" aria-label="Coldly on X"><svg><use href="#x-logo"/></svg></a>
+        </div>
+        <button class="ca right lg" type="button" aria-label="Copy contract address"><span class="ca-pill"><span class="ca-l">CA</span><span class="ca-v"></span><span class="ca-ico"><svg class="i-copy"><use href="#copy"/></svg><svg class="i-tick"><use href="#tick"/></svg></span></span></button>
+      </div>
+      <nav class="foot-col" aria-label="Product">
+        <h4>Product</h4>
+        <a href="#hero" data-scroll>How it works</a>
+        <a href="#networks" data-scroll>Networks</a>
+        <a href="#features" data-scroll>Features</a>
+        <a href="#review" data-scroll>Security</a>
+      </nav>
+      <nav class="foot-col" aria-label="Get Coldly">
+        <h4>Get Coldly</h4>
+        <a href="#download" data-scroll>Windows</a>
+        <a href="#iphone" data-scroll>iPhone <em>Soon</em></a>
+        <a href="#setup" data-scroll>Setup and recovery</a>
+        <a href="#note" data-scroll>What Coldly is</a>
+        <a href="#faq" data-scroll>FAQ</a>
+      </nav>
+    </div>
+    <p class="foot-note">Coldly is a software wallet with a USB lock, not a hardware wallet. Your recovery phrase is what recovers your accounts; keep it safe. Transaction checks support your review and do not guarantee that an address, token or contract is safe.</p>
+    <div class="foot-bottom">
+      <span>© 2026 Coldly</span>
+      <a href="#top" data-scroll class="to-top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+  <div class="foot-mark" aria-hidden="true"><span>Coldly</span></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.27/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
