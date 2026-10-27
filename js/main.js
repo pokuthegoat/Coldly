@@ -68,7 +68,6 @@
   cas.forEach(btn => {
     btn.querySelector('.ca-v').innerHTML =
       `<span>${CA.slice(0, SHOWN)}</span><span class="ca-dots">…</span><span class="ca-rest">${CA.slice(SHOWN)}</span>`;
-    if (btn.closest('.nav-in')) btn.insertAdjacentHTML('beforeend', `<span class="ca-tip">${CA}<small>Click to copy</small></span>`);
     btn.addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(CA); }
       catch {
@@ -76,15 +75,12 @@
         t.value = CA; t.style.position = 'fixed'; t.style.opacity = '0';
         document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove();
       }
-      const tip = btn.querySelector('.ca-tip small');
       btn.querySelector('.ca-l').textContent = 'COPIED';
-      if (tip) tip.textContent = 'Copied to clipboard';
       btn.classList.add('copied');
       clearTimeout(btn._t);
       btn._t = setTimeout(() => {
         btn.classList.remove('copied');
         btn.querySelector('.ca-l').textContent = 'CA';
-        if (tip) tip.textContent = 'Click to copy';
       }, 1600);
     });
   });
