@@ -89,9 +89,7 @@ p{font-size:16px;line-height:1.35;font-weight:300;letter-spacing:-.03em;color:va
 .foot-actions{display:flex;gap:10px}
 /* contract address: short by default, full on hover, copies on click */
 .ca{position:relative;flex:none;height:40px;padding:0;border:0;background:none;color:#fff;font:inherit;cursor:pointer}
-.ca.lg{height:48px}
 .ca-pill{height:100%;display:flex;align-items:center;gap:8px;padding:0 12px;border-radius:8px;background:#232229;white-space:nowrap;font-size:14px;font-weight:400;letter-spacing:-.01em;font-variant-numeric:tabular-nums;box-shadow:0 0 0 1px rgba(255,255,255,.06);transition:background .3s ease,box-shadow .3s ease}
-.ca.lg .ca-pill{padding:0 16px;font-size:15px}
 .ca-l{font-weight:500;font-size:12px;letter-spacing:.12em;color:var(--purple);transition:color .3s ease}
 .ca-v{display:flex;align-items:center}
 .ca-rest{display:inline-block;max-width:0;overflow:hidden;vertical-align:bottom;transition:max-width .6s var(--ease)}
@@ -110,7 +108,6 @@ p{font-size:16px;line-height:1.35;font-weight:300;letter-spacing:-.03em;color:va
 .ca.static{height:48px;align-self:flex-start}
 .ca.static .ca-rest{max-width:none}
 .ca.static .ca-dots{display:none}
-.foot-brand .ca{margin-top:-8px}
 /* navbar CA: stays short, the full address drops down underneath */
 .nav .ca .ca-rest{max-width:0}
 .nav .ca .ca-dots{max-width:1em;opacity:1}
@@ -453,7 +450,11 @@ main,.foot{position:relative;z-index:1}
 .foot-col a:focus-visible,.to-top:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
 .foot-col em{font-style:normal;font-size:11px;margin-left:6px;padding:3px 7px;border-radius:999px;background:var(--purple-soft);color:var(--purple);vertical-align:2px}
 .foot-note{margin-top:64px;padding-top:28px;padding-right:max(0px,calc(100% - 52em));border-top:1px solid var(--line);font-size:13px;color:var(--dim)}
-.foot-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:24px;font-size:14px;color:var(--dim)}
+.foot-bottom{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px;font-size:14px;color:var(--muted);text-align:center}
+.foot-bottom p,.legal-links{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:14px;color:var(--muted)}
+.foot-bottom a{color:rgba(255,255,255,.78);text-decoration:none;transition:color .25s ease}
+.foot-bottom a:hover{color:#fff}
+.foot-bottom p.legal-addr{font-size:12.5px;color:var(--dim)}
 .to-top{font-size:14px}
 .to-top span{display:inline-block;transition:transform .35s var(--ease)}
 .to-top:hover span{transform:translateY(-3px)}
@@ -517,6 +518,7 @@ main,.foot{position:relative;z-index:1}
   .foot-top{grid-template-columns:1fr 1fr;gap:40px 24px}
   .foot-brand{grid-column:1/-1}
   .foot-note{margin-top:48px}
+  .foot-bottom p,.legal-links{gap:6px 16px}
   .card,.steps3 li{padding:24px}
 }
 @media (max-width:420px){
