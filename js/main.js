@@ -46,7 +46,7 @@
   function updateNav() {
     const line = innerHeight * 0.4;
     let active = -1;
-    navSecs.forEach((s, i) => { if (s.getBoundingClientRect().top <= line) active = i; });
+    navSecs.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= line) active = i; }); // Docs has no section
     if (afterNav.getBoundingClientRect().top <= line) active = -1;
     navLinks.forEach((a, i) => a.classList.toggle('active', i === active));
   }
