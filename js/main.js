@@ -93,9 +93,6 @@
   sizeCAs();
   document.fonts && document.fonts.ready.then(sizeCAs);
 
-  // Placeholder until the real installer link exists.
-  document.getElementById('dl').addEventListener('click', e => e.preventDefault());
-
   /* ---------- Blur-in headings (drone-style) ---------- */
   document.querySelectorAll('.blur-in').forEach(el => {
     const words = el.textContent.trim().split(/\s+/);
