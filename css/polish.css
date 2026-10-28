@@ -76,8 +76,8 @@ h1 .w,h2 .w{background:linear-gradient(180deg,#fff 40%,#cbbfff 125%);-webkit-bac
 /* approvals + activity details */
 .inview .uap:first-child em{animation:warnpulse 1.6s ease-in-out 1s 2}
 @keyframes warnpulse{50%{text-shadow:0 0 12px var(--amber)}}
-.uac small.pnd{display:inline-flex;align-items:center;gap:6px}
-.uac small.pnd::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber);animation:blinkdot 1.2s ease-in-out infinite}
+.uac small.pnd{display:flex;align-items:center;gap:6px}
+.uac small.pnd::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--amber);animation:blinkdot 1.2s ease-in-out infinite}
 @keyframes blinkdot{50%{opacity:.25}}
 
 /* phones float */
