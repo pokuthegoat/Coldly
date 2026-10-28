@@ -62,7 +62,7 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') setSheet(false); });
 
   /* ---------- Contract address buttons ---------- */
-  const CA = '0000000000000000000000000000000000000000pump';
+  const CA = '8erwThQZLVqt7KeHpPXpXVXzYvSBDLwRs3GsGrs2pump';
   const SHOWN = 6;
   const cas = [...document.querySelectorAll('.ca')];
   cas.forEach(btn => {
