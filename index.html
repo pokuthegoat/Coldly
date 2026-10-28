@@ -19,6 +19,7 @@
 
 <!-- Arrow-in-circle used by every button -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-testflight" viewBox="0 0 24 24"><g fill="currentColor" stroke="currentColor" stroke-width=".6" stroke-linejoin="round"><path d="M11.45 2.3h1.1l1.05 2.7v3.6l-1.05 1.9h-1.1l-1.05-1.9V5z"/><path d="M11.45 2.3h1.1l1.05 2.7v3.6l-1.05 1.9h-1.1l-1.05-1.9V5z" transform="rotate(120 12 12)"/><path d="M11.45 2.3h1.1l1.05 2.7v3.6l-1.05 1.9h-1.1l-1.05-1.9V5z" transform="rotate(240 12 12)"/></g></symbol>
   <symbol id="arrow" viewBox="0 0 20 20"><path d="M6 10h8m-3.5-3.5L14 10l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="x-logo" viewBox="0 0 24 24"><path fill="currentColor" d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.18h1.7L7.4 4.73H5.58l11.09 14.45Z"/></symbol>
   <symbol id="copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15 9V6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15H9" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
@@ -37,7 +38,7 @@
         <a href="#features" data-scroll data-sec="features">Features</a>
         <a href="#review" data-scroll data-sec="review">Security</a>
         <a href="#iphone" data-scroll data-sec="iphone">iPhone</a>
-        <a href="/privacy">Docs</a>
+        <a href="/privacy">Legal</a>
       </div>
       <a class="btn btn-accent" href="#download" data-scroll>
         <span class="btn-label">Download</span>
@@ -53,7 +54,7 @@
     <a href="#features" data-scroll>Features</a>
     <a href="#review" data-scroll>Security</a>
     <a href="#iphone" data-scroll>iPhone</a>
-    <a href="/privacy">Docs</a>
+    <a href="/privacy">Legal</a>
     <a class="btn btn-light" href="#download" data-scroll>
       <span class="btn-label">Download for Windows</span>
       <span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span>
@@ -76,8 +77,9 @@
             <span class="btn-label">Download for Windows</span>
             <span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span>
           </a>
-          <span class="btn btn-ghost" aria-disabled="true"><span class="btn-label">Coming soon to iPhone</span></span>
+          <a class="btn btn-ghost" href="https://testflight.apple.com/join/ahVZ7GBP" target="_blank" rel="noopener"><svg class="btn-brand"><use href="#i-testflight"/></svg><span class="btn-label">Join TestFlight</span><span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span></a>
         </div>
+        <button class="ca static" type="button" aria-label="Copy contract address"><span class="ca-pill"><span class="ca-l">CA</span><span class="ca-v"></span><span class="ca-ico"><svg class="i-copy"><use href="#copy"/></svg><svg class="i-tick"><use href="#tick"/></svg></span></span></button>
       </div>
 
       <div class="stage-box" id="stageBox">
@@ -332,7 +334,7 @@
         <li>Works with your computer off</li>
       </ul>
       <div class="btn-row">
-        <span class="btn btn-ghost" aria-disabled="true"><span class="btn-label">Coming soon to iPhone</span></span>
+        <a class="btn btn-ghost" href="https://testflight.apple.com/join/ahVZ7GBP" target="_blank" rel="noopener"><svg class="btn-brand"><use href="#i-testflight"/></svg><span class="btn-label">Join TestFlight</span><span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span></a>
       </div>
     </div>
   </div>
@@ -409,10 +411,10 @@
         <span class="btn-label">Download for Windows</span>
         <span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span>
       </a>
-      <span class="btn btn-ghost" aria-disabled="true"><span class="btn-label">Coming soon to iPhone</span></span>
+      <a class="btn btn-ghost" href="https://testflight.apple.com/join/ahVZ7GBP" target="_blank" rel="noopener"><svg class="btn-brand"><use href="#i-testflight"/></svg><span class="btn-label">Join TestFlight</span><span class="btn-ico"><svg><use href="#arrow"/></svg><svg><use href="#arrow"/></svg></span></a>
     </div>
     <button class="ca static" type="button" aria-label="Copy contract address"><span class="ca-pill"><span class="ca-l">CA</span><span class="ca-v"></span><span class="ca-ico"><svg class="i-copy"><use href="#copy"/></svg><svg class="i-tick"><use href="#tick"/></svg></span></span></button>
-    <p class="fine">Free for Windows.</p>
+    <p class="fine">Free for Windows and iPhone.</p>
   </div>
 </section>
 
@@ -442,7 +444,7 @@
       <nav class="foot-col" aria-label="Get Coldly">
         <h4>Get Coldly</h4>
         <a href="#download" data-scroll>Windows</a>
-        <a href="#iphone" data-scroll>iPhone <em>Soon</em></a>
+        <a href="https://testflight.apple.com/join/ahVZ7GBP" target="_blank" rel="noopener">iPhone (TestFlight)</a>
         <a href="#setup" data-scroll>Setup and recovery</a>
         <a href="#note" data-scroll>What Coldly is</a>
         <a href="#faq" data-scroll>FAQ</a>

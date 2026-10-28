@@ -63,6 +63,9 @@ p{font-size:16px;line-height:1.35;font-weight:300;letter-spacing:-.03em;color:va
 .btn-ghost{background:rgba(255,255,255,.1);color:#fff;cursor:default}
 .btn-ghost::after{background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.12) 50%,transparent 70%)}
 .btn-ghost:hover{background:rgba(255,255,255,.15)}
+a.btn-ghost{cursor:pointer}
+.btn-ghost .btn-ico{background:#fff;color:#000}
+.btn-brand{position:relative;width:18px;height:18px;flex:none;margin-left:-4px}
 .btn-row{display:flex;flex-wrap:wrap;gap:12px}
 .btn-row.center{justify-content:center}
 
@@ -430,6 +433,7 @@ main,.foot{position:relative;z-index:1}
 .final .lead{margin-bottom:36px}
 .fine{margin-top:20px;font-size:14px;color:var(--dim)}
 .final .ca{display:block;margin:28px auto 0}
+.hero .ca{display:block;margin-top:16px}
 
 .foot{position:relative;border-top:1px solid var(--line);padding:88px 0 0;overflow:hidden}
 .foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px}
@@ -477,10 +481,10 @@ main,.foot{position:relative;z-index:1}
   .wrap{padding:0 16px}
   h1{font-size:44px}
   h2,.final h2{font-size:36px}
-  .final .ca{height:auto;max-width:100%}
-  .final .ca-pill{min-height:48px;padding:10px 14px;white-space:normal}
-  .final .ca-v{display:block;min-width:0;word-break:break-all;text-align:left}
-  .final .ca-rest{display:inline}
+  .final .ca,.hero .ca{height:auto;max-width:100%}
+  .final .ca-pill,.hero .ca-pill{min-height:48px;padding:10px 14px;white-space:normal}
+  .final .ca-v,.hero .ca-v{display:block;min-width:0;word-break:break-all;text-align:left}
+  .final .ca-rest,.hero .ca-rest{display:inline}
   h3,.card h3{font-size:24px}
   .lead{font-size:17px;line-height:1.3}
   .statement{font-size:30px}
